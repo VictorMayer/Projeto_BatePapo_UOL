@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F922cc4d4-f4ff-42b4-a167-d104f0f5642f%2F919fa83bed3698c340186745cb0214b3-removebg-preview.png?table=block&id=30272a66-47e5-402a-b414-f28169eb4cbd&width=250&userId=b7341f57-f3c5-4151-ab0f-7f0151003417&cache=v2">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/reset.css">
+    <link rel="stylesheet" href="estilos/estilos.css">
+    <title>Bate-Papo UOL</title>
+</head>
+
+<body>
+
+    <div class="header">
+        <img src="imagens/logo2.png" alt="logo">
+        <ion-icon name="people"></ion-icon>
+    </div>
+    <div class="text-bar">
+        <input type="text" placeholder="Escreva aqui...">
+        <ion-icon onclick="enviarMsg()" name="paper-plane-outline"></ion-icon>
+    </div>
+
+    <ul class="msg-feed">
+        <!-- <li class="msg-box status">
+            <span class="time">(09:21:45)</span>
+            <span class="message-text"><strong>João</strong> entra na sala...</span>
+        </li>
+        <li class="msg-box">
+            <span class="time">(09:22:28)</span>
+            <span class="message-text"><strong>João</strong> para <strong>Todos</strong>: Bom dia</span>
+        </li>
+        <li class="msg-box">
+            <span class="time">(09:22:38)</span>
+            <span class="message-text"><strong>Maria</strong> para <strong>João</strong>: Oi João :)</span>
+        </li>
+        <li class="msg-box private">
+            <span class="time">(09:22:48)</span>
+            <span class="message-text"><strong>João</strong> reservadamente para <strong>Maria</strong>: Oi gatinha quer tc?</span>
+        </li>
+        <li class="msg-box status">
+            <span class="time">(09:22:58)</span>
+            <span class="message-text"><strong>Maria</strong> sai da sala...</span>
+        </li> -->
+    </ul>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="scripts.js"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</body>
+
+</html>
