@@ -68,10 +68,9 @@
 
 .msg-feed {
     margin-top: 80px;
-    /* margin-bottom: 80px; */
-    padding-top: 20px;
+    padding-top: 15px;
     width: 100%;
-    height: calc(100vh - 170px);
+    height: calc(100vh - 160px);
     background: #e5e5e5;
     position: fixed;
     bottom: 80px;
@@ -84,7 +83,8 @@
 }
 
 .msg-box {
-    height: 40px;
+    height: auto;
+    padding: 20px 0px;
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -104,6 +104,7 @@
     padding-left: 5px;
     font-family: 'roboto', sans-serif;
     font-weight: 400;
+    word-break: break-all;
 }
 
 .status {
@@ -116,4 +117,125 @@
 
 .hidden {
     display: none;
+}
+
+.login {
+    width: 100vw;
+    height: 100vh;
+    background: #fff;
+    position: fixed;
+    z-index: 10;
+}
+
+.campo-insercao>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login .logo {
+    width: 200px;
+    margin-top: 100px;
+    margin-bottom: 110px;
+    margin-left: calc(50% - 100px);
+}
+
+.login input {
+    width: 261px;
+    height: 54px;
+    color: #aeaeae;
+    text-align: center;
+    border: 2px solid #d7d7d7;
+    background: #FFF;
+    border-radius: 5px;
+    outline-offset: none;
+    outline: none;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.login button {
+    background: #e7e7e7;
+    border-radius: 9px;
+    width: 109px;
+    height: 45px;
+    border-style: none;
+    outline-offset: none;
+    font-size: 18px;
+    color: #696969;
+}
+
+.loading {
+    margin: 0px;
+    text-align: center;
+    font-size: 22px;
+    font-family: 'robot', sans-serif;
+    color: #000;
+}
+
+.login .hidden {
+    display: none;
+}
+
+.tela-menu {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+}
+
+.shadow {
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    width: calc(100vw - 260px);
+    height: 100vh;
+}
+
+.menu {
+    position: fixed;
+    width: 260px;
+    height: 100vh;
+    z-index: 1000;
+    background: #fff;
+    right: 0;
+    top: 0;
+    text-align: center;
+}
+
+.menu-header {
+    padding: 30px 0px;
+    font-size: 16px;
+    font-family: 'roboto', sans-serif;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.contatos-lista {
+    max-height: 660px;
+    overflow: scroll;
+}
+
+.contatos-lista::-webkit-scrollbar {
+    display: none;
+}
+
+.contatos-lista li {
+    padding-left: 18px;
+    font-size: 16px;
+    font-family: 'roboto', sans-serif;
+    text-align: left;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+}
+
+.contatos-lista li>ion-icon {
+    font-size: 20px;
+}
+
+.contatos-lista li>p {
+    display: inline;
+    padding-left: 8px;
 }

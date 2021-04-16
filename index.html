@@ -17,35 +17,42 @@
 
     <div class="header">
         <img src="imagens/logo2.png" alt="logo">
-        <ion-icon name="people"></ion-icon>
+        <ion-icon name="people" onclick="mostrarMenu()"></ion-icon>
     </div>
     <div class="text-bar">
-        <input type="text" placeholder="Escreva aqui...">
+        <input type="text" placeholder="Escreva aqui..." onkeydown="enviarEnter()">
         <ion-icon onclick="enviarMsg()" name="paper-plane-outline"></ion-icon>
     </div>
 
-    <ul class="msg-feed">
-        <!-- <li class="msg-box status">
-            <span class="time">(09:21:45)</span>
-            <span class="message-text"><strong>João</strong> entra na sala...</span>
-        </li>
-        <li class="msg-box">
-            <span class="time">(09:22:28)</span>
-            <span class="message-text"><strong>João</strong> para <strong>Todos</strong>: Bom dia</span>
-        </li>
-        <li class="msg-box">
-            <span class="time">(09:22:38)</span>
-            <span class="message-text"><strong>Maria</strong> para <strong>João</strong>: Oi João :)</span>
-        </li>
-        <li class="msg-box private">
-            <span class="time">(09:22:48)</span>
-            <span class="message-text"><strong>João</strong> reservadamente para <strong>Maria</strong>: Oi gatinha quer tc?</span>
-        </li>
-        <li class="msg-box status">
-            <span class="time">(09:22:58)</span>
-            <span class="message-text"><strong>Maria</strong> sai da sala...</span>
-        </li> -->
-    </ul>
+    <ul class="msg-feed"></ul>
+
+    <div class="tela-menu hidden">
+        <div class="shadow" onclick="esconderMenu(this)"></div>
+        <div class="menu">
+            <div class="menu-header">Escolha um contato<br>para enviar mensagem</div>
+            <ul class="contatos-lista">
+                <li>
+                    <ion-icon name="people"></ion-icon>
+                    <p>Todos</p>
+                </li>
+            </ul>
+            <ul class="contatos-lista contatos"></ul>
+        </div>
+    </div>
+
+    <div class="login">
+        <img class="logo" src="imagens/logo2.png" alt="logo">
+        <div class="campo-insercao">
+            <div>
+                <input class="entrada-usuario" type="text" placeholder="Digite seu nome" onkeydown="logarEnter()">
+                <button onclick="logar()" class="botao-login">Entrar</button>
+            </div>
+        </div>
+        <div class="loading hidden">
+            <img alt="loading-animation" src="imagens/preloader.gif">
+            <p>Entrando...</p>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="scripts.js"></script>
