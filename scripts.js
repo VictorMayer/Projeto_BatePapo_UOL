@@ -1,5 +1,6 @@
 let nome = "";
 let logado = false;
+let id2 = null;
 
 function logarEnter() {
     if (event.key === 'Enter') {
@@ -118,7 +119,7 @@ function mostrarMenu() {
     const elemento = document.querySelector(".tela-menu");
     elemento.classList.remove("hidden");
     buscarContatos();
-    const id2 = setInterval(buscarContatos, 8500);
+    id2 = setInterval(buscarContatos, 8500);
 }
 
 function esconderMenu(elemento) {
