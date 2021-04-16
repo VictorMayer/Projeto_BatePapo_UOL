@@ -56,7 +56,7 @@ function manterConexão() {
 
 function buscarMsg(resposta) {
     const promisse = axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages');
-    promisse.then(renderizarMsgAutoEnabled);
+    promisse.then(renderizarMsgAutoEnabled); // se quiser desabilitar o bot trocar pra renderizarMsg() 
     promisse.catch(tratarErro);
 }
 
@@ -101,8 +101,8 @@ function enviarMsg(msg) {
     }
     let elemento = document.querySelector(".text-bar input").value;
     if (document.querySelector(".text-bar input").value === "") return;
-    if (document.querySelector(".text-bar input").value === "!bot=on") auto = true;
-    if (document.querySelector(".text-bar input").value === "!bot=off") auto = false;
+    if (document.querySelector(".text-bar input").value === "!bot=on") auto = true; // liga o bot
+    if (document.querySelector(".text-bar input").value === "!bot=off") auto = false; // desliga o bot
     const promisse = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/uol/messages', { from: nome, to: userSelected, text: elemento, type: msgType });
     promisse.then(buscarMsg);
     promisse.catch(tratarErro);
@@ -144,38 +144,39 @@ function buscarContatos() {
 function renderizarContatos(resposta) {
     contatos = resposta.data;
     const elemento = document.querySelector(".contatos");
-    elemento.innerHTML = "";
+    elemento.innerHTML = `<li class="user-selected" onclick="selecionarContato(this)">
+                                <ion-icon name="people"></ion-icon>
+                                <p>Todos</p>
+                                <ion-icon class="check ${userSelected === "Todos"?"":"hidden"}" name="checkmark"></ion-icon>
+                            </li>`;
     for (let i = 0; i < contatos.length; i++) {
-        if (userSelected === contatos[i].name) {
-            elemento.innerHTML += `<li class="user-selected" onclick="selecionarContato(this)">
-                            <ion-icon name="person-circle"></ion-icon>
-                            <p>${contatos[i].name}</p>
-                            <ion-icon class="check" name="checkmark"></ion-icon>
-                         </li>`
-        } else if (contatos[i].name === nome) {
-            elemento.innerHTML += ``;
-        } else {
-            elemento.innerHTML += ` <li onclick="selecionarContato(this)">
-                                        <ion-icon name="person-circle"></ion-icon>
-                                        <p>${contatos[i].name}</p>
-                                        <ion-icon class="check hidden" name="checkmark"></ion-icon>
-                                    </li>`;
+        if (contatos[i].name === nome) {
+            continue;
         }
+        elemento.innerHTML += `<li onclick="selecionarContato(this)">
+                                    <ion-icon name="person-circle"></ion-icon>
+                                    <p>${contatos[i].name}</p>
+                                    <ion-icon class="check ${userSelected === contatos[i].name?"":"hidden"}" name="checkmark"></ion-icon>
+                                </li>`;
+
     }
+    // codigo abaixo comentado pois bateu 20:30 de sexta-feira e não deu tempo de implementar
+
+    // if (msgType === "private_message") {
+    //     document.querySelector(".text-bar p").innerHTML = "Enviando para " + userSelected + " (reservadamente)";
+    // }
+    // if (msgType === "message") {
+    //     document.querySelector(".text-bar p").innerHTML = "Enviando para" + userSelected;
+    // }
 }
 
 function selecionarContato(contato) {
     if (contatoAntigo === "") {
         contatoAntigo = document.querySelector(".user-selected");
     }
-    contatoAntigo.classList.remove(".user-selected");
-    contatoAntigo.querySelector(".check").classList.add("hidden");
-    contato.classList.add("user-selected");
-    contato.querySelector(".check").classList.remove("hidden");
     userSelected = contato.querySelector("p").innerHTML;
     contatoAntigo = contato;
-
-
+    buscarContatos();
 }
 
 function selecionarVisibilidade(visibilidade) {
@@ -188,15 +189,24 @@ function selecionarVisibilidade(visibilidade) {
     visibilidade.querySelector(".check").classList.remove("hidden");
     if (document.querySelector(".selected").classList.contains("visivel")) {
         msgType = "message";
+
+        // codigo abaixo comentado pois não tive tempo para implementar
+
+        // if (userSelected !== "Todos") {
+        //     document.querySelector(".text-bar p").classList.add("hidden");
+        // }
     }
     if (document.querySelector(".selected").classList.contains("privado")) {
         msgType = "private_message";
+
+        // linha abaixo comentada pois não tive tempo para implementar
+        // document.querySelector(".text-bar p").classList.remove("hidden");
     }
     console.log(msgType);
     visibilidadeAntigo = visibilidade;
 }
 
-//daqui pra baixo chat-bot
+//daqui pra baixo apenas funções do chat-bot
 
 function renderizarMsgAutoEnabled(resposta) {
     const mensagens = resposta.data;
@@ -221,16 +231,14 @@ function renderizarMsgAutoEnabled(resposta) {
                                         <span class="message-text"><strong>&nbsp;${mensagens[i].from}</strong> reservadamente para <strong>&nbsp;${mensagens[i].to}</strong>: ${mensagens[i].text}</span>
                                     </li>`
         }
-        // if (auto) {
-        //     if (mensagens[i].from !== nome && mensagens[i].text === "entra na sala...") {
-        //         enviarMsgAuto("Olá seja bem vindo " + mensagens[i].from, mensagens[i].from);
-        //     }
-        //     if (mensagens[i].from !== nome && (mensagens[i].text === "oi" || mensagens[i].text === "ola" || mensagens[i].text === "oii" || mensagens[i].text === "olá" || mensagens[i].text === "alo")) {
-        //         enviarMsgAuto("Oii :D " + mensagens[i].from, mensagens[i].from);
-        //         return;
-        //     }
-        // }
-
+    }
+    if (auto) { // casos de mensagem automática
+        if (mensagens[mensagens.length - 1].from !== nome && mensagens[mensagens.length - 1].text === "entra na sala...") {
+            enviarMsgAuto("Olá seja bem vindo " + mensagens[mensagens.length - 1].from + ". Não deixe de comparecer ao bootbar hoje a noite! Contamos com sua presença.", mensagens[mensagens.length - 1].from);
+        }
+        if (mensagens[mensagens.length - 1].from !== nome && (mensagens[mensagens.length - 1].text === "oi" || mensagens[mensagens.length - 1].text === "ola" || mensagens[mensagens.length - 1].text === "oii" || mensagens[mensagens.length - 1].text === "olá" || mensagens[mensagens.length - 1].text === "alo")) {
+            enviarMsgAuto("Oii :D " + mensagens[mensagens.length - 1].from, mensagens[mensagens.length - 1].from);
+        }
     }
     document.querySelector(".msg-box:last-child").scrollIntoView();
 }
